@@ -1,4 +1,3 @@
-# Darumatic container for using kubespray
 FROM centos:7
 MAINTAINER dincer kurnaz <dincersalih79@gmail.com>
 

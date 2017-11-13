@@ -36,5 +36,9 @@ kubespray deploy -u root -P
 #centos7
 kubespray deploy --redhat -u root -P -n flannel
 
+#OR
+
 #Ansible
+
+ansible-playbook -i /root/.kubespray/inventory/inventory.cfg reset.yml
 ansible-playbook -i /root/.kubespray/inventory/inventory.cfg cluster.yml

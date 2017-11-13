@@ -53,4 +53,11 @@ kubectl -n kube-system get service kubernetes-dashboard
 
 #microservices
 kubectl create namespace sock-shop
+
 kubectl create -n sock-shop -f https://raw.githubusercontent.com/microservices-demo/microservices-demo/master/deploy/kubernetes/complete-demo.yaml
+
+kubectl -n sock-shop get svc front-end
+NAME        TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
+front-end   NodePort   10.233.22.125   <none>        80:30001/TCP   4m
+
+http://45.76.95.132:30001/

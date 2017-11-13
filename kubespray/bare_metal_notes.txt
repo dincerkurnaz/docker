@@ -42,3 +42,12 @@ kubespray deploy --redhat -u root -P -n flannel
 
 ansible-playbook -i /root/.kubespray/inventory/inventory.cfg reset.yml
 ansible-playbook -i /root/.kubespray/inventory/inventory.cfg cluster.yml
+
+#Dashboard
+ssh root@$M1
+kubectl cluster-info
+
+kubectl -n kube-system edit service kubernetes-dashboard
+#type: ClusterIP to type: NodePort
+
+kubectl -n kube-system get service kubernetes-dashboard

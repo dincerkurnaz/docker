@@ -1,2 +1,2 @@
 # docker
-Repository for docker containers
+Repository for Kubernetes containers

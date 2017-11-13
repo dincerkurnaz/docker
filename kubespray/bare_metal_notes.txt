@@ -8,6 +8,11 @@ cd docker/kubespray
 docker build -t kubespray:0 .
 docker run -v ~/.ssh/:/root/.ssh/ -v ~/.kubespray.yml:/root/.kubespray.yml -it --name kubespray_ks kubespray:0 bash
 
+ssh-keygen
+ssh-copy-id root@45.77.50.244
+ssh-copy-id root@45.77.51.90 
+ssh-copy-id root@45.77.51.156
+
 #change these ip's for your own
 export M1=45.77.50.244
 export N1=45.77.51.90 
@@ -31,3 +36,5 @@ kubespray deploy -u root -P
 #centos7
 kubespray deploy --redhat -u root -P -n flannel
 
+#Ansible
+ansible-playbook -i /root/.kubespray/inventory/inventory.cfg cluster.yml

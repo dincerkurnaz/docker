@@ -1,6 +1,6 @@
 # Darumatic container for using kubespray
 FROM centos:7
-MAINTAINER Felix Schmitz <Felix@darumatic.com>
+MAINTAINER dincer kurnaz <dincersalih79@gmail.com>
 
 RUN yum -y install git \
     && mkdir /opt/k8setup \

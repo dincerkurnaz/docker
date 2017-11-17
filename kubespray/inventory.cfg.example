@@ -1,0 +1,18 @@
+[kube-master]
+master1
+
+[all]
+node1		ansible_ssh_host=45.32.153.144
+node2		ansible_ssh_host=45.77.140.15
+master1		ansible_ssh_host=45.76.95.132
+
+[k8s-cluster:children]
+kube-node
+kube-master
+
+[kube-node]
+node1
+node2
+
+[etcd]
+master1

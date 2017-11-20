@@ -5,6 +5,7 @@ systemctl start docker
 
 git clone https://github.com/dincerkurnaz/docker.git
 cd docker/kubespray
+
 docker build -t kubespray:0 .
 docker run -v ~/.ssh/:/root/.ssh/ -v ~/.kubespray.yml:/root/.kubespray.yml -it --name kubespray_ks kubespray:0 bash
 
@@ -39,6 +40,35 @@ kubespray deploy --redhat -u root -P -n flannel
 #OR
 
 #Ansible
+git clone https://github.com/kubernetes-incubator/kubespray.git
+cd kubespray
+git checkout -b tags/v2.3.0
+
+cat <<EOF > inventory/inventory.cfg
+# Change ansible_ssh_host to your Public IP, ip to Private IP
+master01 ansible_ssh_host=X.X.X.X ip=A.A.A.A
+node01 ansible_ssh_host=Y.Y.Y.Y ip=B.B.B.B
+node02 ansible_ssh_host=Z.Z.Z.Z ip=C.C.C.C
+[kube-master]
+master01
+[etcd]
+master01
+[kube-node]
+master01
+node01
+node02
+[k8s-cluster:children]
+kube-node
+kube-master
+EOF
+
+vi ./inventory/group_vars/k8s-cluster.yml
+# Enable access to kubernetes dashboard with basic auth
+kube_basic_auth: true
+# Use flannel for networking
+-kube_network_plugin: calico
++kube_network_plugin: flannel
+
 ansible-playbook -i /root/.kubespray/inventory/inventory.cfg reset.yml
 ansible-playbook -i /root/.kubespray/inventory/inventory.cfg cluster.yml
 

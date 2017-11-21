@@ -81,6 +81,10 @@ kubectl -n kube-system edit service kubernetes-dashboard
 
 kubectl -n kube-system get service kubernetes-dashboard
 
+# Play
+kubectl run my-nginx --image=nginx --replicas=2 --port=80
+kubectl expose deployment my-nginx --port=80 --external-ip=45.32.153.144
+
 #microservices
 kubectl create namespace sock-shop
 

@@ -81,6 +81,11 @@ kubectl -n kube-system edit service kubernetes-dashboard
 
 kubectl -n kube-system get service kubernetes-dashboard
 
+#Or
+kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
+http://45.76.95.132:8001/ui
+
+
 # Play
 kubectl run my-nginx --image=nginx --replicas=2 --port=80
 kubectl expose deployment my-nginx --port=80 --external-ip=45.32.153.144

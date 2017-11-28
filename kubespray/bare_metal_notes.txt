@@ -71,6 +71,7 @@ kube_basic_auth: true
 
 ansible-playbook -i /root/.kubespray/inventory/inventory.cfg reset.yml
 ansible-playbook -i /root/.kubespray/inventory/inventory.cfg cluster.yml
+ansible-playbook -i /root/.kubespray/inventory/inventory.cfg scale.yml
 
 #Dashboard
 ssh root@$M1

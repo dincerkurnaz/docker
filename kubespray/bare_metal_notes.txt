@@ -101,3 +101,17 @@ NAME        TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 front-end   NodePort   10.233.22.125   <none>        80:30001/TCP   4m
 
 http://45.76.95.132:30001/
+
+#SDS Rook.io
+watch -t -n1 'kubectl get pods -n rook -o wide && echo && echo && kubectl get pods -o wide'
+git clone https://github.com/rook/rook.git
+cd rook/cluster/examples/kubernetes
+kubectl create -f rook-operator.yaml
+kubectl create -f rook-cluster.yaml
+
+kubectl create -f rook-storageclass.yaml
+kubectl create -f mysql.yaml
+kubectl create -f wordpress.yaml
+
+/dev/rbd0       2.0G   32M  1.8G   2% /var/www/html
+/dev/rbd0       2.0G  122M  1.7G   7% /var/lib/mysql

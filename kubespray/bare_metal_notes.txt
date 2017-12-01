@@ -117,3 +117,8 @@ kubectl create -f wordpress.yaml
 
 /dev/rbd0       2.0G   32M  1.8G   2% /var/www/html
 /dev/rbd0       2.0G  122M  1.7G   7% /var/lib/mysql
+
+## Or HELM 
+helm install --name dincer --set persistence.storageClass=rook-block,persistence.size=2Gi stable/wordpress
+helm list
+helm delete --purge dincer

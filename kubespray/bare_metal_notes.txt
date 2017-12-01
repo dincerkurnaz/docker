@@ -110,6 +110,8 @@ kubectl create -f rook-operator.yaml
 kubectl create -f rook-cluster.yaml
 
 kubectl create -f rook-storageclass.yaml
+kubectl patch storageclass rook-block -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+
 kubectl create -f mysql.yaml
 kubectl create -f wordpress.yaml
 

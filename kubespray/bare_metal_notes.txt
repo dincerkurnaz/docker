@@ -122,3 +122,39 @@ kubectl create -f wordpress.yaml
 helm install --name dincer --set persistence.storageClass=rook-block,persistence.size=2Gi stable/wordpress
 helm list
 helm delete --purge dincer
+
+#### ingress
+git clone https://github.com/luxas/kubeadm-workshop
+
+kubectl apply -f demos/loadbalancing/traefik-common.yaml
+kubectl apply -f demos/loadbalancing/traefik-ngrok.yaml
+
+curl -sSL $(kubectl -n kube-system get svc ngrok -o template --template "{{.spec.clusterIP}}")/api/tunnels | jq  ".tunnels[].public_url" | sed 's/"//g;/http:/d'
+
+https://5ae9197b.ngrok.io
+
+helm install --set wordpressUsername=admin,wordpressPassword=password,mariadb.mariadbRootPassword=secretpassword,ingress.enabled=true stable/wordpress
+
+# helm ls
+NAME                  REVISION  UPDATED                   STATUS    CHART           NAMESPACE
+triangular-chinchilla 1         Mon Dec  4 12:02:05 2017  DEPLOYED  wordpress-0.7.4 default
+
+# cat ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wordpress.local-triangular-chinchillam
+  namespace: default
+  annotations:
+    traefik.frontend.rule.type: PathPrefixStrip
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: triangular-chinchilla-wordpress
+          servicePort: 80
+
+kubectl create -f ingress.yaml
+####

@@ -86,6 +86,8 @@ kubectl -n kube-system get service kubernetes-dashboard
 kubectl proxy --address 0.0.0.0 --accept-hosts '.*'
 http://45.76.95.132:8001/ui
 
+# all object
+kubectl get all --all-namespaces
 
 # Play
 kubectl run my-nginx --image=nginx --replicas=2 --port=80

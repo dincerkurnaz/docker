@@ -154,7 +154,7 @@ spec:
       - path: /
         backend:
           serviceName: triangular-chinchilla-wordpress
-          servicePort: 80
+          servicePort: 443
 
 kubectl create -f ingress.yaml
 ####

@@ -89,6 +89,9 @@ http://45.76.95.132:8001/ui
 # all object
 kubectl get all --all-namespaces
 
+#healty
+kubectl get componentstatuses
+
 # Play
 kubectl run my-nginx --image=nginx --replicas=2 --port=80
 kubectl expose deployment my-nginx --port=80 --external-ip=45.32.153.144
